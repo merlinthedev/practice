@@ -25,6 +25,7 @@ public class Practice extends JavaPlugin {
 
         System.out.println(":D");
         System.out.println("Merlin branch");
+        System.out.println("OUR BRANCH");
 
         registerHandlers();
 
