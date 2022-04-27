@@ -1,0 +1,128 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Built-By: merlin
+Created-By: Apache Maven 3.6.1
+Build-Jdk: 1.8.0_241
+
+Name: com/mongodb
+Sealed: true
+
+Name: com/mongodb/client
+Sealed: true
+
+Name: com/mongodb/client/gridfs
+Sealed: true
+
+Name: com/mongodb/client/gridfs/codecs
+Sealed: true
+
+Name: com/mongodb/client/gridfs/model
+Sealed: true
+
+Name: com/mongodb/client/internal
+Sealed: true
+
+Name: com/mongodb/client/jndi
+Sealed: true
+
+Name: com/mongodb/client/model/geojson
+Sealed: true
+
+Name: com/mongodb/client/model/geojson/codecs
+Sealed: true
+
+Name: com/mongodb/client/vault
+Sealed: true
+
+Name: com/mongodb/client/connection
+Sealed: true
+
+Name: com/mongodb/client/connection/netty
+Sealed: true
+
+Name: com/mongodb/client/model
+Sealed: true
+
+Name: com/mongodb/diagnostics/logging
+Sealed: true
+
+Name: com/mongodb/event
+Sealed: true
+
+Name: com/mongodb/gridfs
+Sealed: true
+
+Name: com/mongodb/internal
+Sealed: true
+
+Name: com/mongodb/internal/async
+Sealed: true
+
+Name: com/mongodb/internal/authentication
+Sealed: true
+
+Name: com/mongodb/internal/binding
+Sealed: true
+
+Name: com/mongodb/internal/build
+Sealed: true
+
+Name: com/mongodb/internal/capi
+Sealed: true
+
+Name: com/mongodb/internal/client/model
+Sealed: true
+
+Name: com/mongodb/internal/connection
+Sealed: true
+
+Name: com/mongodb/internal/connection/tlschannel
+Sealed: true
+
+Name: com/mongodb/internal/connection/tlschannel/async
+Sealed: true
+
+Name: com/mongodb/internal/connection/tlschannel/impl
+Sealed: true
+
+Name: com/mongodb/internal/connection/tlschannel/util
+Sealed: true
+
+Name: com/mongodb/internal/dns
+Sealed: true
+
+Name: com/mongodb/internal/event
+Sealed: true
+
+Name: com/mongodb/internal/management/jmx
+Sealed: true
+
+Name: com/mongodb/internal/operation
+Sealed: true
+
+Name: com/mongodb/internal/session
+Sealed: true
+
+Name: com/mongodb/internal/thread
+Sealed: true
+
+Name: com/mongodb/internal/validator
+Sealed: true
+
+Name: com/mongodb/lang
+Sealed: true
+
+Name: com/mongodb/management
+Sealed: true
+
+Name: com/mongodb/operation
+Sealed: true
+
+Name: com/mongodb/selector
+Sealed: true
+
+Name: com/mongodb/session
+Sealed: true
+
+Name: com/mongodb/util
+Sealed: true
