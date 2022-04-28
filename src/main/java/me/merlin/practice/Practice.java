@@ -1,7 +1,6 @@
 package me.merlin.practice;
 
 import lombok.Getter;
-import lombok.Setter;
 import me.merlin.practice.mongo.MongoHandler;
 import me.merlin.practice.profile.ProfileHandler;
 import me.merlin.practice.util.Logger;

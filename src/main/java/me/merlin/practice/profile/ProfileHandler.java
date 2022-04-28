@@ -2,6 +2,7 @@ package me.merlin.practice.profile;
 
 import com.google.common.collect.Maps;
 import me.merlin.practice.Practice;
+import me.merlin.practice.profile.command.ProfileCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -15,6 +16,8 @@ public class ProfileHandler {
     public ProfileHandler() {
         profileMap = Maps.newHashMap();
 
+
+        Practice.getInstance().getCommand("profile").setExecutor(new ProfileCommand());
         Bukkit.getServer().getPluginManager().registerEvents(new ProfileListener(), Practice.getInstance());
     }
 

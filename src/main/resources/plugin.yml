@@ -1,3 +1,8 @@
 name: practice
 main: me.merlin.practice.Practice
 version: ${project.version}
+
+
+commands:
+  profile:
+    description: Get a player profile from database
