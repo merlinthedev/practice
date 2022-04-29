@@ -8,3 +8,9 @@ commands:
     description: Get a player profile from database
   add:
     description: Add a player to the database
+  kit:
+    description: Kit command
+  duel:
+    description: Duel command
+  accept:
+    description: Accept a duel

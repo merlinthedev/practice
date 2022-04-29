@@ -45,7 +45,7 @@ public class DuelCommand implements CommandExecutor {
                 return true;
             }
 
-            targetProfile.getDuelRequests().add(new DuelRequest(player.getUniqueId(), ));
+            //targetProfile.getDuelRequests().add(new DuelRequest(player.getUniqueId(), ));
             player.sendMessage("§aYou sent a duel request to §e" + target.getName() + "§a.");
 
         }

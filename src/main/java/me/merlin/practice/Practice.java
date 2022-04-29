@@ -24,6 +24,7 @@ public class Practice extends JavaPlugin {
     @Getter
     private MatchHandler matchHandler;
 
+    @Getter
     private KitHandler kitHandler;
 
 
@@ -31,6 +32,11 @@ public class Practice extends JavaPlugin {
         instance = this;
 
         registerHandlers();
+
+
+        // register config.yml file
+        getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
 
         disableGameRules(
                 "doDaylightCycle",

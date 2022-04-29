@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class Kit {
 
-    @Getter private String name;
+    @Getter @Setter private String name;
     @Getter @Setter private ItemStack[] inventory;
     @Getter @Setter private ItemStack[] armor;
 
