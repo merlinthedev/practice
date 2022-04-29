@@ -17,9 +17,9 @@ import java.util.Map;
 public class PlayerProfile {
 
     private long enderpearlCooldown;
-    private PlayerState playerState;
-    private Match match;
-    private List<DuelRequest> duelRequests;
+    @Getter @Setter private PlayerState playerState;
+    @Getter @Setter private Match match;
+    @Getter private List<DuelRequest> duelRequests;
     private Conversation conversation;
     private Map<Kit, Integer> eloMap;
 
@@ -39,6 +39,7 @@ public class PlayerProfile {
     public void setElo(Kit kit, int elo) {
         eloMap.put(kit, elo);
     }
+
 
     public enum PlayerState {
         LOBBY,
