@@ -17,6 +17,9 @@ public class ProfileListener implements Listener {
         if(!profileHandler.hasProfile(player)) {
             profileHandler.addPlayer(player);
         }
+        if(!player.hasPlayedBefore()) {
+            Practice.getInstance().getMongoHandler().storePlayer(player);
+        }
     }
 
     public void onPlayerQuit(PlayerQuitEvent event) {

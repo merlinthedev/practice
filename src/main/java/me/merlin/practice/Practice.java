@@ -21,10 +21,7 @@ public class Practice extends JavaPlugin {
 
 
     public void onEnable() {
-
-        System.out.println(":D");
-        System.out.println("Merlin branch");
-        System.out.println("OUR BRANCH hamster");
+        instance = this;
 
         registerHandlers();
 

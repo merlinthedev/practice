@@ -6,3 +6,5 @@ version: ${project.version}
 commands:
   profile:
     description: Get a player profile from database
+  add:
+    description: Add a player to the database
