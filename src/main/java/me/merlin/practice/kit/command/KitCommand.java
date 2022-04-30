@@ -2,6 +2,7 @@ package me.merlin.practice.kit.command;
 
 import me.merlin.practice.Practice;
 import me.merlin.practice.kit.Kit;
+import me.merlin.practice.kit.KitHandler;
 import me.merlin.practice.util.Logger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,6 +19,7 @@ public class KitCommand implements CommandExecutor {
 
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
+            KitHandler kitHandler = plugin.getKitHandler();
             switch (strings.length) {
                 case 0:
                     player.sendMessage("§8-=- §fKit §8-=-");
@@ -40,20 +42,25 @@ public class KitCommand implements CommandExecutor {
                     if (strings[0].equalsIgnoreCase("create")) {
                         Kit kit = new Kit();
 
-                        plugin.getConfig().getConfigurationSection("kits").set(strings[1], kit);
+                        plugin.getConfig().getConfigurationSection("kits").set(strings[1], kit.getName());
+                        plugin.saveConfig();
                         Logger.success(strings[1] + " has been created!");
 
 
                         kit.setName(strings[1]);
                         kit.setInventory(player.getInventory().getContents());
                         kit.setArmor(player.getInventory().getArmorContents());
+                        kitHandler.addKit(kit);
 
                         return true;
 
                     }
                     if (strings[0].equalsIgnoreCase("delete")) {
                         plugin.getConfig().getConfigurationSection("kits").set(strings[1], null);
+                        Kit kit = kitHandler.getKit(strings[1]);
+                        kitHandler.removeKit(kit);
                         player.sendMessage("§cKit §f" + strings[1] + " §cdeleted!");
+                        plugin.saveConfig();
                         return true;
                     }
 

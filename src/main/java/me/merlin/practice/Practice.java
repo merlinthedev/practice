@@ -1,6 +1,7 @@
 package me.merlin.practice;
 
 import lombok.Getter;
+import me.merlin.practice.duel.DuelHandler;
 import me.merlin.practice.kit.KitHandler;
 import me.merlin.practice.match.MatchHandler;
 import me.merlin.practice.mongo.MongoHandler;
@@ -26,6 +27,9 @@ public class Practice extends JavaPlugin {
 
     @Getter
     private KitHandler kitHandler;
+
+    @Getter
+    private DuelHandler duelHandler;
 
 
     public void onEnable() {
@@ -55,6 +59,7 @@ public class Practice extends JavaPlugin {
         profileHandler = new ProfileHandler();
         kitHandler = new KitHandler();
         matchHandler = new MatchHandler();
+        duelHandler = new DuelHandler();
     }
 
     private void disableGameRules(String... gameRules) {

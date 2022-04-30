@@ -20,6 +20,8 @@ public class PlayerAddCommand implements CommandExecutor {
                 if(strings.length == 0) {
                     if(Practice.getInstance().getMongoHandler().readPlayer(player.getUniqueId()) == null) {
                         Practice.getInstance().getMongoHandler().storePlayer(player);
+                        player.sendMessage("§aYou have been added to the database.");
+
                     } else {
                         player.sendMessage("§cYou already have a profile!");
                     }

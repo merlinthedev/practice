@@ -61,4 +61,19 @@ public class MongoHandler {
         return "Name: " + name + " UUID: " + uuidString + " Elo: " + elo;
     }
 
+    public boolean exists(UUID uuid) {
+        boolean exists = false;
+        DBObject query = new BasicDBObject("uuid", uuid);
+        DBObject cursor = collection.findOne(query);
+        if(cursor != null) {
+            Logger.info("Player exists!");
+            exists = true;
+        } else {
+            Logger.info("Player does not exist!");
+        }
+
+        return exists;
+
+    }
+
 }
