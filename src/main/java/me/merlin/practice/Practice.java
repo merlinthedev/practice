@@ -13,6 +13,8 @@ import java.util.Arrays;
 
 public class Practice extends JavaPlugin {
 
+    //ToDo: Add multiple config files; kits, config.yml, arenas
+
     @Getter
     public static Practice instance;
 

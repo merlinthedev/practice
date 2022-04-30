@@ -7,6 +7,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class KitBuilder {
 
+    //Todo: Redo this class, it's a mess.
+
     public static Inventory build(String name, int size, Player owner, ItemStack[] items) {
         Inventory inventory = Bukkit.createInventory(owner, size, name);
         inventory.setContents(items);

@@ -8,9 +8,7 @@ public class SpawnHandler {
     Practice plugin;
 
     public SpawnHandler() {
-        // TODO
-        // Register Spawn Command
-        // Constructor
+        // TODO read location from config
 
         plugin = Practice.getInstance();
         plugin.getCommand("spawn").setExecutor(new SpawnCommand());
