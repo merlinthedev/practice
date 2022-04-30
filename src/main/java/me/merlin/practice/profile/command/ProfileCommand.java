@@ -10,8 +10,11 @@ import org.bukkit.entity.Player;
 
 public class ProfileCommand implements CommandExecutor {
 
+    Practice plugin;
 
-
+    public ProfileCommand() {
+        plugin = Practice.getInstance();
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -19,10 +22,16 @@ public class ProfileCommand implements CommandExecutor {
             Player player = (Player) commandSender;
             if (player.hasPermission("practice.profile")) {
                 if (strings.length == 0) {
-                    String output = Practice.getInstance().getMongoHandler().readPlayer(player.getUniqueId());
-                    Logger.info(output);
-                    player.sendMessage("debug");
-                    return true;
+                    if(plugin.getMongoHandler().exists(player.getUniqueId())) {
+                        Logger.success("&7Your profile is &a&l✔");
+//                        String output = plugin.getMongoHandler().readPlayer(player.getUniqueId());
+//                        Logger.info(output);
+                        player.sendMessage(plugin.getMongoHandler().readPlayer(player.getUniqueId()));
+
+                    } else {
+                        player.sendMessage("§cPlayer does not exists!");
+                        return true;
+                    }
                 }
                 if (strings.length == 1) {
                     Player target = Bukkit.getPlayerExact(strings[0]);

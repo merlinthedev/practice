@@ -2,6 +2,10 @@ package me.merlin.practice.mongo;
 
 import com.mongodb.*;
 import lombok.Getter;
+import me.merlin.practice.Practice;
+import me.merlin.practice.kit.Kit;
+import me.merlin.practice.profile.PlayerProfile;
+import me.merlin.practice.profile.ProfileHandler;
 import me.merlin.practice.util.Logger;
 import org.bukkit.entity.Player;
 
@@ -46,19 +50,23 @@ public class MongoHandler {
     }
 
     // Get a player from the database
-    public String readPlayer(UUID uuid) {
-        DBObject query = new BasicDBObject("uuid", uuid);
-        DBObject cursor = collection.findOne(query);
-        if(cursor == null) {
-            Logger.error("Query is null!");
+    public String[] readPlayer(UUID uuid) {
+        String[] output = new String[2];
+        DBObject r = new BasicDBObject("uuid", uuid);
+        DBObject result = collection.findOne(r);
+        if (result == null) {
+            Logger.warning("Could not find player with UUID: " + uuid);
             return null;
         }
 
-        String name = (String) cursor.get("name");
-        String uuidString = (String) cursor.get("uuid");
-        int elo = (int) cursor.get("elo");
+        Logger.success("Found player with UUID: " + uuid);
+        String name = (String) result.get("name");
+        int elo = (int) result.get("elo");
 
-        return "Name: " + name + " UUID: " + uuidString + " Elo: " + elo;
+        output[0] = name;
+        output[1] = String.valueOf(elo);
+
+        return output;
     }
 
     public boolean exists(UUID uuid) {
