@@ -6,6 +6,7 @@ import me.merlin.practice.kit.KitHandler;
 import me.merlin.practice.match.MatchHandler;
 import me.merlin.practice.mongo.MongoHandler;
 import me.merlin.practice.profile.ProfileHandler;
+import me.merlin.practice.spawn.SpawnHandler;
 import me.merlin.practice.util.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,23 +16,14 @@ public class Practice extends JavaPlugin {
 
     //ToDo: Add multiple config files; kits, config.yml, arenas
 
-    @Getter
-    public static Practice instance;
+    @Getter public static Practice instance;
 
-    @Getter
-    private MongoHandler mongoHandler;
-
-    @Getter
-    private ProfileHandler profileHandler;
-
-    @Getter
-    private MatchHandler matchHandler;
-
-    @Getter
-    private KitHandler kitHandler;
-
-    @Getter
-    private DuelHandler duelHandler;
+    @Getter private MongoHandler mongoHandler;
+    @Getter private ProfileHandler profileHandler;
+    @Getter private MatchHandler matchHandler;
+    @Getter private KitHandler kitHandler;
+    @Getter private DuelHandler duelHandler;
+    @Getter private SpawnHandler spawnHandler;
 
 
     public void onEnable() {
@@ -62,6 +54,7 @@ public class Practice extends JavaPlugin {
         kitHandler = new KitHandler();
         matchHandler = new MatchHandler();
         duelHandler = new DuelHandler();
+        spawnHandler = new SpawnHandler();
     }
 
     private void disableGameRules(String... gameRules) {
