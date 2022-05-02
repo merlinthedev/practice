@@ -13,5 +13,7 @@ public class DuelHandler {
 
         plugin.getCommand("duel").setExecutor(new DuelCommand());
         plugin.getCommand("accept").setExecutor(new AcceptCommand());
+
+        plugin.getServer().getPluginManager().registerEvents(new DuelMenu(), plugin);
     }
 }

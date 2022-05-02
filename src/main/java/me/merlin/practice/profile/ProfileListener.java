@@ -4,6 +4,7 @@ import me.merlin.practice.Practice;
 import me.merlin.practice.mongo.MongoHandler;
 import me.merlin.practice.util.Logger;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,6 +41,13 @@ public class ProfileListener implements Listener {
         } else {
             Logger.info("Player " + player.getName() + " already exists in the database.");
         }
+
+        Location loc = new Location(player.getWorld(), 0, 0, 0);
+        loc.setX(Practice.getInstance().getConfig().getInt("spawn.x"));
+        loc.setY(Practice.getInstance().getConfig().getInt("spawn.y"));
+        loc.setZ(Practice.getInstance().getConfig().getInt("spawn.z"));
+
+        player.teleport(loc);
     }
 
     @EventHandler

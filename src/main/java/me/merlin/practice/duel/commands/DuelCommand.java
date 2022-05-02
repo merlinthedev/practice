@@ -65,7 +65,7 @@ public class DuelCommand implements CommandExecutor {
                 return true;
             }
 
-            DuelMenu duelMenu = new DuelMenu(player);
+            DuelMenu duelMenu = new DuelMenu(player, target);
             duelMenu.openMenu();
             Logger.success("Duel menu opened.");
             //targetProfile.getDuelRequests().add(new DuelRequest(player.getUniqueId(), ));
