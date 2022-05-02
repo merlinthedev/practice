@@ -51,11 +51,12 @@ public class ProfileListener implements Listener {
     }
 
     @EventHandler
-    public void onFallDamage(EntityDamageEvent event) {
+    public void onPlayerDamage(EntityDamageEvent event) {
         ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            if (profileHandler.getProfile(player).getPlayerState() == PlayerProfile.PlayerState.LOBBY) {
+            PlayerProfile playerProfile = profileHandler.getProfile(player);
+            if (playerProfile.getPlayerState() == PlayerProfile.PlayerState.LOBBY) {
                 event.setCancelled(true);
             }
 
