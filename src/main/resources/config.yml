@@ -2,6 +2,9 @@ spawn:
 
 
 kits:
-  - NoDebuff
-  - Debuff
-  - Sumo
+  NoDebuff:
+    item: 276
+  Debuff:
+    item: 283
+  Sumo:
+    item: 280

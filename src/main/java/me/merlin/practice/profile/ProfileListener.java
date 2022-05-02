@@ -18,10 +18,15 @@ public class ProfileListener implements Listener {
         ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
         MongoHandler mongoHandler = Practice.getInstance().getMongoHandler();
 
-
         if(!profileHandler.hasProfile(player)) {
             profileHandler.addPlayer(player);
         }
+
+        PlayerProfile profile = profileHandler.getProfile(player);
+        profile.setPlayerState(PlayerProfile.PlayerState.LOBBY);
+
+
+
 
         if(!mongoHandler.exists(player.getUniqueId())) {
             mongoHandler.storePlayer(player);

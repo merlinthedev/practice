@@ -1,9 +1,11 @@
 package me.merlin.practice.duel.commands;
 
 import me.merlin.practice.Practice;
+import me.merlin.practice.duel.DuelMenu;
 import me.merlin.practice.duel.DuelRequest;
 import me.merlin.practice.profile.PlayerProfile;
 import me.merlin.practice.profile.ProfileHandler;
+import me.merlin.practice.util.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -60,8 +62,11 @@ public class DuelCommand implements CommandExecutor {
                 return true;
             }
 
+            DuelMenu duelMenu = new DuelMenu(player);
+            duelMenu.openMenu();
+            Logger.success("Duel menu opened.");
             //targetProfile.getDuelRequests().add(new DuelRequest(player.getUniqueId(), ));
-            player.sendMessage("§aYou sent a duel request to §e" + target.getName() + "§a.");
+
 
         }
 
