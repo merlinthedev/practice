@@ -26,7 +26,7 @@ public class DuelMenu implements Listener {
 
     public void openMenu() {
         kits.addAll(plugin.getConfig().getConfigurationSection("kits").getKeys(false));
-        inv = Bukkit.createInventory(player, kits.size(), ChatColor.DARK_RED + "Choose a kit");
+        inv = Bukkit.createInventory(player, kits.size() + (9 - (kits.size() % 9)), ChatColor.DARK_RED + "Choose a kit");
         for (String kit : kits) {
             ItemStack item = new ItemStack(plugin.getConfig().getInt("kits." + kit + ".item"));
             inv.addItem(item);

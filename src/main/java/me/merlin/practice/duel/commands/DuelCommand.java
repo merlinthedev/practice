@@ -42,6 +42,10 @@ public class DuelCommand implements CommandExecutor {
             PlayerProfile playerProfile = profileHandler.getProfile(player);
             PlayerProfile targetProfile = profileHandler.getProfile(target);
 
+            for(Player p : Bukkit.getOnlinePlayers()) {
+                System.out.println(p.getName() + " has profile: " + profileHandler.hasProfile(p));
+            }
+
             if (playerProfile.getPlayerState() != PlayerProfile.PlayerState.LOBBY) {
                 player.sendMessage("§cYou must be in the lobby to duel.");
                 return true;
