@@ -13,14 +13,16 @@ import java.util.UUID;
 public class ProfileHandler {
 
     private Map<UUID, PlayerProfile> profileMap;
+    private Practice plugin;
 
     public ProfileHandler() {
         profileMap = Maps.newHashMap();
+        plugin = Practice.getInstance();
 
 
-        Practice.getInstance().getCommand("profile").setExecutor(new ProfileCommand());
-        Practice.getInstance().getCommand("add").setExecutor(new PlayerAddCommand());
-        Bukkit.getServer().getPluginManager().registerEvents(new ProfileListener(), Practice.getInstance());
+        plugin.getCommand("profile").setExecutor(new ProfileCommand());
+        plugin.getCommand("add").setExecutor(new PlayerAddCommand());
+        plugin.getServer().getPluginManager().registerEvents(new ProfileListener(), plugin);
     }
 
     public void addPlayer(Player player) {

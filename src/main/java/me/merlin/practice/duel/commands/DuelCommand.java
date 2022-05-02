@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 public class DuelCommand implements CommandExecutor {
 
 
-    //TODO: Fix the kit bug
     //TODO: Open Duel GUI with list of kits
 
     @Override
