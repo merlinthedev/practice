@@ -15,7 +15,7 @@ public class EffectCommand implements CommandExecutor {
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
             Location location = player.getLocation();
-            player.playEffect(location, Effect.EXPLOSION_LARGE, 500);
+            player.playEffect(location, Effect.MOBSPAWNER_FLAMES, 10);
             player.sendMessage("You have played an explosion effect.");
         }
         return false;
