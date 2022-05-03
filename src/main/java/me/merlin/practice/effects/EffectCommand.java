@@ -1,13 +1,11 @@
 package me.merlin.practice.effects;
 
+import org.bukkit.Effect;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 public class EffectCommand implements CommandExecutor {
 
@@ -16,8 +14,9 @@ public class EffectCommand implements CommandExecutor {
 
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            Location location = player.getLocation()
-            player.playEffect(location,8, 20 );
+            Location location = player.getLocation();
+            player.playEffect(location, Effect.EXPLOSION_LARGE, 500);
+            player.sendMessage("You have played an explosion effect.");
         }
         return false;
     }

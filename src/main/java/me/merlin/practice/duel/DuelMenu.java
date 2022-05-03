@@ -54,7 +54,7 @@ public class DuelMenu implements Listener {
         player.openInventory(inv);
 
     }
-//TODO: check player.getinventory() line
+
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         ProfileHandler handler = plugin.getProfileHandler();
@@ -63,7 +63,7 @@ public class DuelMenu implements Listener {
         if (event.getInventory().getTitle().equals(ChatColor.DARK_RED + "Choose a kit")) {
             // Check what item is clicked and check what kit it is
             ItemStack item = event.getCurrentItem();
-            targetProfile.getDuelRequests().add(new DuelRequest(player.getUniqueId(), ));
+//            targetProfile.getDuelRequests().add(new DuelRequest(player.getUniqueId(), ));
 
 
             event.setCancelled(true);
@@ -71,7 +71,6 @@ public class DuelMenu implements Listener {
         if (event.getClickedInventory().getName() == null) {
             Logger.warning("Clicked inventory is null");
         }
-        player.getInventory().setItem (0, event.getCurrentItem());
-   }
+    }
 
 }

@@ -16,3 +16,5 @@ commands:
     description: Accept a duel
   spawn:
     description: Teleport to spawn
+  effect:
+    description: Give a player an effect

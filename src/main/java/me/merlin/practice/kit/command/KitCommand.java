@@ -40,7 +40,7 @@ public class KitCommand implements CommandExecutor {
                     break;
                 case 2:
                     if (strings[0].equalsIgnoreCase("create")) {
-                        Kit kit = new Kit();
+                        Kit kit = new Kit(strings[1]);
 
                         //todo: it brokey? i think it is an issue with the commands in the (config/plugin).yml file but im not sure
                         plugin.getConfig().getConfigurationSection("kits").set(strings[1], kit.getName());
@@ -48,7 +48,7 @@ public class KitCommand implements CommandExecutor {
                         Logger.success(strings[1] + " has been created!");
 
 
-                        kit.setName(strings[1]);
+                        kit.setDisplayName(strings[1]);
                         kit.setInventory(player.getInventory().getContents());
                         kit.setArmor(player.getInventory().getArmorContents());
                         kitHandler.addKit(kit);
