@@ -42,6 +42,7 @@ public class KitCommand implements CommandExecutor {
                     if (strings[0].equalsIgnoreCase("create")) {
                         Kit kit = new Kit();
 
+                        //todo: it brokey? i think it is an issue with the commands in the (config/plugin).yml file but im not sure
                         plugin.getConfig().getConfigurationSection("kits").set(strings[1], kit.getName());
                         plugin.saveConfig();
                         Logger.success(strings[1] + " has been created!");

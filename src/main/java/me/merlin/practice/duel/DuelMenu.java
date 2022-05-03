@@ -54,7 +54,7 @@ public class DuelMenu implements Listener {
         player.openInventory(inv);
 
     }
-
+//TODO: check player.getinventory() line
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         ProfileHandler handler = plugin.getProfileHandler();
@@ -71,6 +71,7 @@ public class DuelMenu implements Listener {
         if (event.getClickedInventory().getName() == null) {
             Logger.warning("Clicked inventory is null");
         }
-    }
+        player.getInventory().setItem (0, event.getCurrentItem());
+   }
 
 }
