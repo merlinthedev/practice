@@ -1,6 +1,7 @@
 package me.merlin.practice.effects;
 
 import me.merlin.practice.Practice;
+import me.merlin.practice.kit.command.KitCommand;
 
 public class EffectHandler {
 
@@ -9,7 +10,6 @@ public class EffectHandler {
     public EffectHandler() {
         plugin = Practice.getInstance();
         plugin.getCommand("effect").setExecutor(new EffectCommand());
-
 
     }
 }
