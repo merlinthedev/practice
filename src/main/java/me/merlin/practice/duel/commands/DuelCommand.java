@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 public class DuelCommand implements CommandExecutor {
 
 
-    //TODO: Open Duel GUI with list of kits
+
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -65,8 +65,8 @@ public class DuelCommand implements CommandExecutor {
                 return true;
             }
 
-            DuelMenu duelMenu = new DuelMenu(player, target);
-            duelMenu.openMenu();
+            DuelMenu duelMenu = new DuelMenu(target.getUniqueId());
+            duelMenu.openMenu(player);
             Logger.success("Duel menu opened.");
             //targetProfile.getDuelRequests().add(new DuelRequest(player.getUniqueId(), ));
 

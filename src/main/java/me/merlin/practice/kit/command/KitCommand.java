@@ -26,6 +26,7 @@ public class KitCommand implements CommandExecutor {
                     player.sendMessage("§c/kit create <name> §8- §fCreate a kit");
                     player.sendMessage("§c/kit delete <name> §8- §fDelete a kit");
                     player.sendMessage("§c/kit list §8- §fList all kits");
+                    player.sendMessage("§c/kit setDisplayItem <kit name> §8- §fSet a kit's display item");
 
                     break;
                 case 1:
@@ -62,6 +63,16 @@ public class KitCommand implements CommandExecutor {
                         kitHandler.removeKit(kit);
                         player.sendMessage("§cKit §f" + strings[1] + " §cdeleted!");
                         plugin.saveConfig();
+                        return true;
+                    }
+
+                    if(strings[0].equalsIgnoreCase("setdisplayitem")){
+                        Kit kit = kitHandler.getKit(strings[1]);
+                        if(player.getInventory().getItemInHand() != null){
+                            plugin.getConfig().getConfigurationSection("kits").set(strings[1] + ".item", player.getInventory().getItemInHand());
+                            plugin.saveConfig();
+                        }
+                        kit.setDisplayItem(player.getInventory().getItemInHand());
                         return true;
                     }
 

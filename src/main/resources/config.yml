@@ -4,7 +4,24 @@ spawn:
 kits:
   NoDebuff:
     item: 276
+    display: NoDebuff
   Debuff:
     item: 283
+    display: Debuff
   Sumo:
     item: 280
+    display: Sumo
+
+
+menus:
+  duel:
+    title:
+      - "&eDuel Menu"
+  global:
+    items:
+      placeholder:
+        slot:
+        id:
+        name: " "
+        lore:
+          - ""

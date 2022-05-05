@@ -3,6 +3,8 @@ package me.merlin.practice.kit;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ public class Kit {
     @Getter @Setter private ItemStack[] inventory;
     @Getter @Setter private ItemStack[] armor;
 
+
+    @Getter @Setter private ItemStack displayItem = new ItemStack(Material.DIAMOND_SWORD);
 
     @Setter @Getter private List<UUID> unrankedQueue = new ArrayList<>();
     @Setter @Getter private List<UUID> unrankedMatch = new ArrayList<>();
