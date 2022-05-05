@@ -49,6 +49,9 @@ public class AcceptCommand implements CommandExecutor {
 
             Match match = new Match(duelRequest.getKit(), ImmutableList.of(player.getUniqueId()), ImmutableList.of(target.getUniqueId()));
 
+
+
+            // TODO give items to players
             playerProfile.setMatch(match);
             playerProfile.setPlayerState(PlayerProfile.PlayerState.MATCH);
             match.getKit().getUnrankedMatch().add(player.getUniqueId());

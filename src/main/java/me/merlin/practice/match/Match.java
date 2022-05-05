@@ -34,6 +34,8 @@ public class Match {
 
 
     public void start() {
+
+        // TODO MATCH STARTING LOGIC
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
         ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
 
@@ -41,12 +43,10 @@ public class Match {
 
         Logger.success("Starting match with kit " + kit.getName());
 
-
-
-
-
-
     }
+
+    //TODO MATCH ENDING LOGIC
+    //TODO change player state on death
 
     public enum MatchState{
         STARTING, ACTIVE, ENDING

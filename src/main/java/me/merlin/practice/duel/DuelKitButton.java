@@ -56,15 +56,14 @@ public class DuelKitButton extends Button {
         player.closeInventory();
 
         targetProfile.getDuelRequests().add(new DuelRequest(player.getUniqueId(), kit));
-        player.sendMessage("§aYou have sent a duel request to " + target.getName() + "!");
+        player.sendMessage("§eYou have sent a §a" + kit.getName() + " §eduel request to §b" + target.getName() + "§e!");
 
 
-        // TODO Change color codes.
 
-        FancyMessage message = new FancyMessage("§a" + player.getName() + " has requested to duel you with " + kit.getDisplayName() + "!" + "§a[Accept]")
+
+        FancyMessage message = new FancyMessage( "§b" + player.getName() + " §ehas requested to duel you with §d" + kit.getName() + "§e!" + "§6 [Accept]")
         .tooltip("Click to accept").command("/accept " + player.getName());
 
         message.send(target);
-        return;
     }
 }

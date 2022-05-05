@@ -7,6 +7,7 @@ import me.merlin.practice.kit.Kit;
 import me.merlin.practice.kit.KitHandler;
 import me.merlin.practice.menu.Button;
 import me.merlin.practice.menu.Menu;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -20,9 +21,7 @@ public class DuelMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-
-        // TODO Color codes
-        return Practice.getInstance().getConfig().getString("menus.duel.title");
+        return ChatColor.DARK_RED + Practice.getInstance().getConfig().getString("menus.duel.title");
     }
 
     @Override
