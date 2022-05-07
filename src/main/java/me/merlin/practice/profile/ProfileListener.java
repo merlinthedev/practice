@@ -50,28 +50,7 @@ public class ProfileListener implements Listener {
         player.teleport(loc);
     }
 
-    @EventHandler
-    public void onPlayerHunger(FoodLevelChangeEvent event) {
-        Player player = (Player) event.getEntity();
-        ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
-        PlayerProfile playerProfile = profileHandler.getProfile(player);
-        if (playerProfile.getPlayerState() == PlayerProfile.PlayerState.LOBBY) {
-            event.setCancelled(true);
-        }
-    }
 
-    @EventHandler
-    public void onPlayerDamage(EntityDamageEvent event) {
-        ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
-        if (event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
-            PlayerProfile playerProfile = profileHandler.getProfile(player);
-            if (playerProfile.getPlayerState() == PlayerProfile.PlayerState.LOBBY) {
-                event.setCancelled(true);
-            }
-
-        }
-    }
 
 
     @EventHandler

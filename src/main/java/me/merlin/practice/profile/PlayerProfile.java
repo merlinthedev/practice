@@ -20,6 +20,14 @@ public class PlayerProfile {
     @Getter @Setter private PlayerState playerState;
     @Getter @Setter private Match match;
     @Getter private List<DuelRequest> duelRequests;
+
+    @Getter @Setter private int hits;
+    @Getter @Setter private int combo;
+    @Getter @Setter private int longestCombo;
+    @Getter @Setter private int thrownPots;
+    @Getter @Setter private int fullyLandedPots;
+
+
     private Conversation conversation;
     private Map<Kit, Integer> eloMap;
 

@@ -3,14 +3,17 @@ package me.merlin.practice;
 import lombok.Getter;
 import me.merlin.practice.duel.DuelHandler;
 import me.merlin.practice.effects.EffectHandler;
+import me.merlin.practice.items.ItemHandler;
 import me.merlin.practice.kit.KitHandler;
 import me.merlin.practice.match.MatchHandler;
 import me.merlin.practice.menu.MenuHandler;
 import me.merlin.practice.mongo.MongoHandler;
+import me.merlin.practice.profile.PlayerHandler;
 import me.merlin.practice.profile.ProfileHandler;
 import me.merlin.practice.spawn.SpawnHandler;
 import me.merlin.practice.util.Logger;
 import org.bukkit.Effect;
+import org.bukkit.entity.Item;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
@@ -28,7 +31,9 @@ public class Practice extends JavaPlugin {
     @Getter private DuelHandler duelHandler;
     @Getter private SpawnHandler spawnHandler;
     @Getter private MenuHandler menuHandler;
+    @Getter private PlayerHandler playerHandler;
     private EffectHandler effectHandler;
+    private ItemHandler itemHandler;
 
 
     public void onEnable() {
@@ -62,6 +67,8 @@ public class Practice extends JavaPlugin {
         spawnHandler = new SpawnHandler();
         effectHandler = new EffectHandler();
         menuHandler = new MenuHandler();
+        itemHandler = new ItemHandler();
+        playerHandler = new PlayerHandler();
     }
 
     private void disableGameRules(String... gameRules) {

@@ -3,6 +3,7 @@ package me.merlin.practice.match;
 import me.merlin.practice.Practice;
 import me.merlin.practice.profile.PlayerProfile;
 import me.merlin.practice.profile.ProfileHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ public class MatchHandler {
     private List<Match> matchList = new ArrayList<>();
 
     public MatchHandler() {
+        Bukkit.getPluginManager().registerEvents(new MatchListener(), Practice.getInstance());
+
 
     }
 
