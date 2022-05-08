@@ -7,10 +7,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginEnableEvent;
@@ -27,14 +26,11 @@ public class ProfileListener implements Listener {
 
         ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
         MongoHandler mongoHandler = Practice.getInstance().getMongoHandler();
+        PlayerHandler playerHandler = Practice.getInstance().getPlayerHandler();
 
         if (!profileHandler.hasProfile(player)) {
             profileHandler.addPlayer(player);
         }
-
-        PlayerProfile profile = profileHandler.getProfile(player);
-        profile.setPlayerState(PlayerProfile.PlayerState.LOBBY);
-
 
         if (!mongoHandler.exists(player.getUniqueId())) {
             mongoHandler.storePlayer(player);
@@ -42,12 +38,14 @@ public class ProfileListener implements Listener {
             Logger.info("Player " + player.getName() + " already exists in the database.");
         }
 
-        Location loc = new Location(player.getWorld(), 0, 0, 0);
-        loc.setX(Practice.getInstance().getConfig().getInt("spawn.x"));
-        loc.setY(Practice.getInstance().getConfig().getInt("spawn.y"));
-        loc.setZ(Practice.getInstance().getConfig().getInt("spawn.z"));
+    }
 
-        player.teleport(loc);
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+
+        ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
+        profileHandler.removeProfile(player);
     }
 
 
@@ -61,13 +59,6 @@ public class ProfileListener implements Listener {
         event.setCancelled(true);
     }
 
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-
-        ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
-        profileHandler.removeProfile(player);
-    }
 
     @EventHandler
     public void onPluginEnable(PluginEnableEvent event) {

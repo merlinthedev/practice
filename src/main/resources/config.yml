@@ -12,6 +12,17 @@ kits:
     item: 280
     display: Sumo
 
+items:
+  UNRANKED:
+    slot: 0
+    item: "267:0"
+    name: "Unranked"
+    enabled: true
+  RANKED:
+    slot: 1
+    item: "276:0"
+    name: "Ranked"
+    enabled: true
 
 menus:
   duel:

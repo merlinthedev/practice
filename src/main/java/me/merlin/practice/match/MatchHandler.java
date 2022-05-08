@@ -14,7 +14,7 @@ public class MatchHandler {
     private List<Match> matchList = new ArrayList<>();
 
     public MatchHandler() {
-        Bukkit.getPluginManager().registerEvents(new MatchListener(), Practice.getInstance());
+        Practice.getInstance().getServer().getPluginManager().registerEvents(new MatchListener(), Practice.getInstance());
 
 
     }

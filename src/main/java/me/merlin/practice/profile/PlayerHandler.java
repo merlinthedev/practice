@@ -4,9 +4,13 @@ import me.merlin.practice.Practice;
 import me.merlin.practice.items.Items;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import sun.java2d.cmm.Profile;
 
 public class PlayerHandler {
+
+    public PlayerHandler() {
+
+        Practice.getInstance().getServer().getPluginManager().registerEvents(new PlayerListener(), Practice.getInstance());
+    }
 
 
     public void resetPlayer(Player player) {
