@@ -11,6 +11,9 @@ import me.merlin.practice.mongo.MongoHandler;
 import me.merlin.practice.profile.PlayerHandler;
 import me.merlin.practice.profile.ProfileHandler;
 import me.merlin.practice.spawn.SpawnHandler;
+import me.merlin.practice.util.BuilderCommand;
+import me.merlin.practice.util.DebugCommands;
+import me.merlin.practice.util.DebugHandler;
 import me.merlin.practice.util.Logger;
 import org.bukkit.Effect;
 import org.bukkit.entity.Item;
@@ -32,8 +35,9 @@ public class Practice extends JavaPlugin {
     @Getter private SpawnHandler spawnHandler;
     @Getter private MenuHandler menuHandler;
     @Getter private PlayerHandler playerHandler;
-    private EffectHandler effectHandler;
-    private ItemHandler itemHandler;
+    @Getter private EffectHandler effectHandler;
+    @Getter private ItemHandler itemHandler;
+    @Getter private DebugHandler debugHandler;
 
 
     public void onEnable() {
@@ -50,6 +54,9 @@ public class Practice extends JavaPlugin {
                 "doDaylightCycle",
                 "doMobSpawning"
         );
+
+
+
         Logger.success("Practice has been enabled!");
     }
 
@@ -69,6 +76,7 @@ public class Practice extends JavaPlugin {
         menuHandler = new MenuHandler();
         itemHandler = new ItemHandler();
         playerHandler = new PlayerHandler();
+        debugHandler = new DebugHandler();
     }
 
     private void disableGameRules(String... gameRules) {

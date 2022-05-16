@@ -28,13 +28,13 @@ public class MatchListener implements Listener {
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
 
         PlayerProfile profile = profileHandler.getProfile(player);
-        if(matchHandler.getMatch(player) == null) {
+        if (matchHandler.getMatch(player) == null) {
             event.setCancelled(true);
             return;
         }
 
         Match match = matchHandler.getMatch(player);
-        if(match.getDead().contains(player.getUniqueId())) {
+        if (match.getDead().contains(player.getUniqueId())) {
             event.setCancelled(true);
             return;
         }
@@ -48,13 +48,13 @@ public class MatchListener implements Listener {
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
 
         PlayerProfile profile = profileHandler.getProfile(player);
-        if(matchHandler.getMatch(player) == null) {
+        if (matchHandler.getMatch(player) == null) {
             event.setCancelled(true);
             return;
         }
 
         Match match = matchHandler.getMatch(player);
-        if(match.getDead().contains(player.getUniqueId())) {
+        if (match.getDead().contains(player.getUniqueId())) {
             event.setCancelled(true);
             return;
         }
@@ -69,7 +69,7 @@ public class MatchListener implements Listener {
         Player player = (Player) event.getEntity();
 
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
-        if(matchHandler.getMatch(player) == null) {
+        if (matchHandler.getMatch(player) == null) {
             event.setFoodLevel(20);
         }
     }
@@ -81,7 +81,7 @@ public class MatchListener implements Listener {
         Player player = event.getEntity();
 
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
-        if(matchHandler.getMatch(player) != null) {
+        if (matchHandler.getMatch(player) != null) {
             Match match = matchHandler.getMatch(player);
 
             if (((match.getAlive(match.getTeamOne().contains(player.getUniqueId())) > 1))) {
@@ -100,7 +100,7 @@ public class MatchListener implements Listener {
         Player player = event.getPlayer();
 
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
-        if(matchHandler.getMatch(player) != null) {
+        if (matchHandler.getMatch(player) != null) {
             Match match = matchHandler.getMatch(player);
             // TODO: UHC
         }
@@ -112,18 +112,18 @@ public class MatchListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
-        if(!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
 
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
         Player player = (Player) event.getEntity();
 
-        if(matchHandler.getMatch(player) == null) {
+        if (matchHandler.getMatch(player) == null) {
             event.setCancelled(true);
             return;
         }
 
         Match match = matchHandler.getMatch(player);
-        if(match.getMatchState() != Match.MatchState.ACTIVE) {
+        if (match.getMatchState() != Match.MatchState.ACTIVE) {
             event.setCancelled(true);
             return;
         }
@@ -131,33 +131,33 @@ public class MatchListener implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
-        if(!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
 
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
         Player player = (Player) event.getEntity();
 
-        if(matchHandler.getMatch(player) == null) {
+        if (matchHandler.getMatch(player) == null) {
             event.setCancelled(true);
             return;
         }
 
-        if(event.getDamager() instanceof Player) {
+        if (event.getDamager() instanceof Player) {
             Player damager = (Player) event.getDamager();
 
-            if(matchHandler.getMatch(damager) == null) {
+            if (matchHandler.getMatch(damager) == null) {
                 event.setCancelled(true);
                 return;
             }
 
             Match match = matchHandler.getMatch(damager);
 
-            if(match.getMatchState() != Match.MatchState.ACTIVE) {
+            if (match.getMatchState() != Match.MatchState.ACTIVE) {
                 event.setCancelled(true);
                 return;
             }
 
             Kit kit = match.getKit();
-            if(kit != null && !kit.isDamage()) {
+            if (kit != null && !kit.isDamage()) {
                 event.setDamage(0);
                 return;
             }
@@ -169,7 +169,7 @@ public class MatchListener implements Listener {
         Player player = event.getPlayer();
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
 
-        if(matchHandler.getMatch(player) != null) {
+        if (matchHandler.getMatch(player) != null) {
             Match match = matchHandler.getMatch(player);
 
             match.addDeath(player, Match.MatchDeathReason.DISCONNECTED, null);
@@ -182,8 +182,11 @@ public class MatchListener implements Listener {
         ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
         PlayerProfile profile = profileHandler.getProfile(player);
 
-        if(profile.getPlayerState() != PlayerProfile.PlayerState.MATCH) {
-            event.setCancelled(true);
+
+        if (profile.getPlayerState() != PlayerProfile.PlayerState.MATCH) {
+            if (!profile.isBuilder()) {
+                event.setCancelled(true);
+            }
             return;
         }
     }

@@ -56,6 +56,11 @@ public class ProfileListener implements Listener {
         Player player = event.getPlayer();
 
         //TODO: Implement block break event for UHC mode
+        ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
+        PlayerProfile profile = profileHandler.getProfile(player);
+
+        if(profile.isBuilder()) event.setCancelled(false);
+
         event.setCancelled(true);
     }
 

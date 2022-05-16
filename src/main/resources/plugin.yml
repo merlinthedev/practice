@@ -18,3 +18,9 @@ commands:
     description: Teleport to spawn
   effect:
     description: Give a player an effect
+  state:
+    description: get a player state
+  builder:
+    description: Toggle builder mode
+  giveitems:
+    description: Give a player the default lobby items

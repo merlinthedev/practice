@@ -51,7 +51,7 @@ public class AcceptCommand implements CommandExecutor {
 
 
 
-            // TODO give items to players
+
             playerProfile.setMatch(match);
             playerProfile.setPlayerState(PlayerProfile.PlayerState.MATCH);
             match.getKit().getUnrankedMatch().add(player.getUniqueId());

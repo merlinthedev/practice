@@ -61,7 +61,8 @@ public class Match {
     private MatchState state = MatchState.STARTING;
 
 
-    @Getter private MatchState matchState = MatchState.STARTING;
+    @Getter
+    private MatchState matchState = MatchState.STARTING;
 
 
     public void start() {
@@ -69,6 +70,7 @@ public class Match {
         // TODO MATCH STARTING LOGIC
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
         ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
+        PlayerHandler playerHandler = Practice.getInstance().getPlayerHandler();
 
         matchHandler.addMatch(this);
 
@@ -81,6 +83,18 @@ public class Match {
             teamTwoLeaderProfile = profileHandler.getProfile(teamTwoLeader);
             teamTwo.forEach(players::add);
         }
+
+        matchAction(player -> {
+            playerHandler.resetPlayer(player);
+
+            PlayerProfile profile = profileHandler.getProfile(player);
+
+            player.getInventory().setContents(kit.getInventory());
+            player.getInventory().setArmorContents(kit.getArmor());
+            player.updateInventory();
+        });
+
+
 
 
         Logger.success("Starting match with kit " + kit.getName());
@@ -173,7 +187,7 @@ public class Match {
             case DISCONNECTED: {
                 matchAction(p -> {
 //                    p.sendMessage(Messages.PLAYER_DEATH_DISCONNECTED.getMessage().replace("%player%", getEntryTeam(player).getPrefix() + player.getName()));
-                    p.sendMessage(getEntryTeam(player).getPrefix() + player.getName() + " disconnected");
+                    p.sendMessage(player.getName() + " disconnected");
                 });
                 exempt.add(player.getUniqueId());
                 break;
@@ -181,21 +195,21 @@ public class Match {
             case KILLED: {
                 matchAction(p -> {
 //                    p.sendMessage(Messages.PLAYER_DEATH_KILLED.getMessage().replace("%player%", getEntryTeam(player).getPrefix() + player.getName()).replace("%killer%", p.getScoreboard().getEntryTeam(killer.getName()).getPrefix() + killer.getName()));
-                    p.sendMessage(getEntryTeam(player).getPrefix() + player.getName() + " was killed by " + getEntryTeam(killer).getPrefix() + killer.getName());
+                    p.sendMessage(player.getName() + " was killed by " + killer.getName());
                 });
                 break;
             }
             case DIED: {
                 matchAction(p -> {
 //                    p.sendMessage(Messages.PLAYER_DEATH_DIED.getMessage().replace("%player%", getEntryTeam(player).getPrefix() + player.getName()));
-                    p.sendMessage(getEntryTeam(player).getPrefix() + player.getName() + " died");
+                    p.sendMessage(player.getName() + " died");
                 });
                 break;
             }
             case LEFT: {
                 matchAction(p -> {
 //                    p.sendMessage(Messages.PLAYER_DEATH_LEFT.getMessage().replace("%player%", getEntryTeam(player).getPrefix() + player.getName()));
-                    p.sendMessage(getEntryTeam(player).getPrefix() + player.getName() + " left");
+                    p.sendMessage(player.getName() + " left");
                 });
                 exempt.add(player.getUniqueId());
                 break;

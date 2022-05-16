@@ -4,6 +4,7 @@ import me.merlin.practice.Practice;
 import me.merlin.practice.kit.Kit;
 import me.merlin.practice.kit.KitHandler;
 import me.merlin.practice.util.Logger;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,6 +28,7 @@ public class KitCommand implements CommandExecutor {
                     player.sendMessage("§c/kit delete <name> §8- §fDelete a kit");
                     player.sendMessage("§c/kit list §8- §fList all kits");
                     player.sendMessage("§c/kit setDisplayItem <kit name> §8- §fSet a kit's display item");
+                    player.sendMessage("§c/kit setInventory <kit name> §8- §fSet a kit's display name");
 
                     break;
                 case 1:
@@ -66,14 +68,40 @@ public class KitCommand implements CommandExecutor {
                         return true;
                     }
 
-                    if(strings[0].equalsIgnoreCase("setdisplayitem")){
+                    if (strings[0].equalsIgnoreCase("setdisplayitem")) {
                         Kit kit = kitHandler.getKit(strings[1]);
-                        if(player.getInventory().getItemInHand() != null){
+                        if (player.getInventory().getItemInHand() != null) {
                             plugin.getConfig().getConfigurationSection("kits").set(strings[1] + ".item", player.getInventory().getItemInHand());
                             plugin.saveConfig();
                         }
                         kit.setDisplayItem(player.getInventory().getItemInHand());
                         return true;
+                    }
+
+                    if (strings[0].equalsIgnoreCase("setinventory")) {
+                        if (strings[1] == null) {
+                            player.sendMessage("§cYou must specify a kit!");
+                            return true;
+                        }
+                        if (kitHandler.getKit(strings[1]) != null) {
+                            Kit kit = kitHandler.getKit(strings[1]);
+                            if (player.getGameMode() == GameMode.CREATIVE) {
+                                player.sendMessage("§cYou must be in survival mode to set the inventory!");
+                                return true;
+                            }
+                            kit.setInventory(player.getInventory().getContents().clone());
+                            kit.setArmor(player.getInventory().getArmorContents().clone());
+
+                            Practice.getInstance().getConfig().set("kits." + strings[1] + ".inventory", kit.getInventory());
+                            Practice.getInstance().getConfig().set("kits." + strings[1] + ".armor", kit.getArmor());
+                            Practice.getInstance().saveConfig();
+
+                            player.sendMessage("§aInventory set for kit §e" + kit.getName() + "§a!");
+                            return true;
+                        } else {
+                            player.sendMessage("§cKit not found!");
+                            return true;
+                        }
                     }
 
                     break;

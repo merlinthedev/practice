@@ -26,6 +26,7 @@ public class PlayerProfile {
     @Getter @Setter private int longestCombo;
     @Getter @Setter private int thrownPots;
     @Getter @Setter private int fullyLandedPots;
+    @Getter @Setter private boolean builder;
 
 
     private Conversation conversation;
