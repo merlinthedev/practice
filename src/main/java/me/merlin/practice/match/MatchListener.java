@@ -98,6 +98,8 @@ public class MatchListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
+        ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
+        PlayerProfile profile = profileHandler.getProfile(player);
 
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
         if (matchHandler.getMatch(player) != null) {
@@ -107,21 +109,20 @@ public class MatchListener implements Listener {
 
 
         // TODO: BUILDER
-        event.setCancelled(true);
+        event.setCancelled(!profile.isBuilder());
     }
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
-
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
+
         Player player = (Player) event.getEntity();
 
         if (matchHandler.getMatch(player) == null) {
             event.setCancelled(true);
             return;
         }
-
         Match match = matchHandler.getMatch(player);
         if (match.getMatchState() != Match.MatchState.ACTIVE) {
             event.setCancelled(true);
@@ -130,10 +131,11 @@ public class MatchListener implements Listener {
     }
 
     @EventHandler
-    public void onEntityDamage(EntityDamageByEntityEvent event) {
+    public void onDamage(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
 
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
+
         Player player = (Player) event.getEntity();
 
         if (matchHandler.getMatch(player) == null) {
@@ -148,8 +150,9 @@ public class MatchListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
-
             Match match = matchHandler.getMatch(damager);
+
+
 
             if (match.getMatchState() != Match.MatchState.ACTIVE) {
                 event.setCancelled(true);

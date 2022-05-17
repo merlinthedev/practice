@@ -2,10 +2,12 @@ package me.merlin.practice.match;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import me.merlin.practice.Practice;
 import me.merlin.practice.kit.Kit;
 import me.merlin.practice.match.events.MatchEndEvent;
+import me.merlin.practice.match.events.MatchStartEvent;
 import me.merlin.practice.profile.PlayerHandler;
 import me.merlin.practice.profile.PlayerProfile;
 import me.merlin.practice.profile.ProfileHandler;
@@ -15,6 +17,7 @@ import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
@@ -39,6 +42,8 @@ public class Match {
 
     private PlayerProfile teamOneLeaderProfile;
     private PlayerProfile teamTwoLeaderProfile;
+
+
 
     @Getter
     private List<UUID> players = new ArrayList<>();
@@ -73,6 +78,7 @@ public class Match {
         PlayerHandler playerHandler = Practice.getInstance().getPlayerHandler();
 
         matchHandler.addMatch(this);
+        Logger.success("Match added to handler!");
 
         teamOneLeader = Bukkit.getPlayer(teamOne.get(0));
         teamOneLeaderProfile = profileHandler.getProfile(teamOneLeader);
@@ -85,16 +91,57 @@ public class Match {
         }
 
         matchAction(player -> {
-            playerHandler.resetPlayer(player);
+            Logger.success("Match action started!");
 
             PlayerProfile profile = profileHandler.getProfile(player);
+            playerHandler.resetPlayer(player);
+            if(kit != null) {
+                player.getInventory().setContents(kit.getInventory());
+                player.getInventory().setArmorContents(kit.getArmor());
+            }
 
-            player.getInventory().setContents(kit.getInventory());
-            player.getInventory().setArmorContents(kit.getArmor());
+            Logger.success("Player reset!");
+
+
             player.updateInventory();
+            player.setMaximumNoDamageTicks(kit != null ? kit.getDamageTicks() : 19);
+
+            System.out.println(kit.getArmor());
+            System.out.println(kit.getInventory());
+            Logger.success("Inventory set!");
         });
 
+        MatchStartEvent matchStartEvent = new MatchStartEvent(this);
+        matchStartEvent.call();
+        Logger.success("Match start event called!");
 
+        new BukkitRunnable() {
+            int i = 5;
+
+            public void run() {
+                if(matchState != MatchState.STARTING) {
+                    this.cancel();
+                    return;
+                }
+
+                if(i> 0) {
+                    broadcast(ChatColor.YELLOW + "Match starting in " + ChatColor.RED + i + ChatColor.YELLOW + " seconds!");
+                    playSound(Sound.NOTE_STICKS);
+                }
+                i--;
+                if(i == -1) {
+                    this.cancel();
+                    broadcast(ChatColor.YELLOW + "Match started!");
+                    playSound(Sound.NOTE_PLING);
+
+
+                    matchState = MatchState.ACTIVE;
+                    startTime = System.currentTimeMillis();
+                    return;
+                }
+
+            }
+        }.runTaskTimerAsynchronously(Practice.getInstance(), 20L, 20L);
 
 
         Logger.success("Starting match with kit " + kit.getName());
@@ -251,6 +298,15 @@ public class Match {
             if (!dead.contains(uuid)) alive += 1;
         }
         return alive;
+    }
+
+    public void broadcast(String message) {
+        matchAction(player -> player.sendMessage(message));
+
+    }
+
+    public void playSound(Sound sound) {
+        matchAction(player -> player.playSound(player.getLocation(), sound, 20, 20));
     }
 
 

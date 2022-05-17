@@ -12,7 +12,7 @@ public class BaseEvent extends Event {
 
     @Override
     public HandlerList getHandlers() {
-        return null;
+        return handlerList;
     }
 
     public void call() {

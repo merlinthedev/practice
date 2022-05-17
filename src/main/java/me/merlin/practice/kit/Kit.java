@@ -22,6 +22,7 @@ public class Kit {
     @Getter @Setter private ItemStack[] armor;
 
     @Getter @Setter private boolean damage;
+    @Getter @Setter private int damageTicks = 19;
 
 
     @Getter @Setter private ItemStack displayItem = new ItemStack(Material.DIAMOND_SWORD);

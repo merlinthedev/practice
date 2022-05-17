@@ -9,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class KitCommand implements CommandExecutor {
 
@@ -83,8 +84,10 @@ public class KitCommand implements CommandExecutor {
                             player.sendMessage("§cYou must specify a kit!");
                             return true;
                         }
-                        if (kitHandler.getKit(strings[1]) != null) {
-                            Kit kit = kitHandler.getKit(strings[1]);
+                        String name = strings[1];
+
+                        if (kitHandler.getKit(name) != null) {
+                            Kit kit = kitHandler.getKit(name);
                             if (player.getGameMode() == GameMode.CREATIVE) {
                                 player.sendMessage("§cYou must be in survival mode to set the inventory!");
                                 return true;
@@ -92,16 +95,42 @@ public class KitCommand implements CommandExecutor {
                             kit.setInventory(player.getInventory().getContents().clone());
                             kit.setArmor(player.getInventory().getArmorContents().clone());
 
-                            Practice.getInstance().getConfig().set("kits." + strings[1] + ".inventory", kit.getInventory());
-                            Practice.getInstance().getConfig().set("kits." + strings[1] + ".armor", kit.getArmor());
+                            Practice.getInstance().getConfig().set("kits." + name + ".inventory", kit.getInventory());
+                            Practice.getInstance().getConfig().set("kits." + name + ".armor", kit.getArmor());
                             Practice.getInstance().saveConfig();
 
                             player.sendMessage("§aInventory set for kit §e" + kit.getName() + "§a!");
                             return true;
-                        } else {
+                        } else{
                             player.sendMessage("§cKit not found!");
                             return true;
                         }
+                    }
+
+                    if (strings[0].equalsIgnoreCase("see")) {
+                        if (strings[1] == null) {
+                            player.sendMessage("§cYou must specify a kit!");
+                            return true;
+                        }
+
+                        Kit kit = kitHandler.getKit(strings[1]);
+                        if (kit == null) {
+                            player.sendMessage("§cKit not found!");
+                            return true;
+                        }
+
+                        player.sendMessage("§aKit: §e" + kit.getName());
+                        player.sendMessage("§aDisplay Item: §e" + kit.getDisplayItem());
+                        player.sendMessage("§aInventory: " + kit.getInventory().length);
+                        player.sendMessage("§aArmor: " + kit.getArmor().length);
+
+                        player.sendMessage("§aKit Contents:");
+                        for (ItemStack item : kit.getInventory()) {
+                            if (item != null) {
+                                player.sendMessage("§e" + item.getType().name());
+                            }
+                        }
+                        return true;
                     }
 
                     break;
