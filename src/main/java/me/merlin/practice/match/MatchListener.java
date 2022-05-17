@@ -4,6 +4,7 @@ import me.merlin.practice.Practice;
 import me.merlin.practice.kit.Kit;
 import me.merlin.practice.profile.PlayerProfile;
 import me.merlin.practice.profile.ProfileHandler;
+import me.merlin.practice.util.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -117,6 +118,7 @@ public class MatchListener implements Listener {
         event.setCancelled(!profile.isBuilder());
     }
 
+
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
@@ -125,17 +127,19 @@ public class MatchListener implements Listener {
         Player player = (Player) event.getEntity();
 
         if (matchHandler.getMatch(player) == null) {
+
             event.setCancelled(true);
             return;
         }
         Match match = matchHandler.getMatch(player);
         if (match.getMatchState() != Match.MatchState.ACTIVE) {
+
             event.setCancelled(true);
             return;
         }
     }
 
-    @EventHandler
+    //    @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
 

@@ -2,6 +2,7 @@ package me.merlin.practice.profile;
 
 import me.merlin.practice.Practice;
 import me.merlin.practice.items.Items;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -53,8 +54,10 @@ public class PlayerHandler {
         spawn.setYaw(180f);
         player.teleport(spawn);
 
-
-
+        Bukkit.getOnlinePlayers().forEach(p -> {
+            p.showPlayer(player);
+            player.showPlayer(p);
+        });
 
 
     }

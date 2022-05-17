@@ -39,12 +39,13 @@ public class Match {
     private final List<UUID> teamTwo;
 
 
+    @Getter
     private Player teamOneLeader;
+    @Getter
     private Player teamTwoLeader;
 
     private PlayerProfile teamOneLeaderProfile;
     private PlayerProfile teamTwoLeaderProfile;
-
 
 
     @Getter
@@ -97,7 +98,7 @@ public class Match {
 
             PlayerProfile profile = profileHandler.getProfile(player);
             playerHandler.resetPlayer(player);
-            if(kit != null) {
+            if (kit != null) {
                 player.getInventory().setContents(kit.getInventory());
                 player.getInventory().setArmorContents(kit.getArmor());
             }
@@ -122,17 +123,17 @@ public class Match {
             int i = 5;
 
             public void run() {
-                if(matchState != MatchState.STARTING) {
+                if (matchState != MatchState.STARTING) {
                     this.cancel();
                     return;
                 }
 
-                if(i> 0) {
+                if (i > 0) {
                     broadcast(ChatColor.YELLOW + "Match starting in " + ChatColor.RED + i + ChatColor.YELLOW + " seconds!");
                     playSound(Sound.NOTE_STICKS);
                 }
                 i--;
-                if(i == -1) {
+                if (i == -1) {
                     this.cancel();
                     broadcast(ChatColor.YELLOW + "Match started!");
                     playSound(Sound.NOTE_PLING);
@@ -151,7 +152,6 @@ public class Match {
 
     }
 
-    //TODO MATCH ENDING LOGIC
 
     @SneakyThrows
     public void end(boolean t1) {
@@ -239,30 +239,26 @@ public class Match {
         switch (matchDeathReason) {
             case DISCONNECTED: {
                 matchAction(p -> {
-//                    p.sendMessage(Messages.PLAYER_DEATH_DISCONNECTED.getMessage().replace("%player%", getEntryTeam(player).getPrefix() + player.getName()));
-                    p.sendMessage(player.getName() + " disconnected");
+                    p.sendMessage(ChatColor.RED + player.getName() + " has disconnected.");
                 });
                 exempt.add(player.getUniqueId());
                 break;
             }
             case KILLED: {
                 matchAction(p -> {
-//                    p.sendMessage(Messages.PLAYER_DEATH_KILLED.getMessage().replace("%player%", getEntryTeam(player).getPrefix() + player.getName()).replace("%killer%", p.getScoreboard().getEntryTeam(killer.getName()).getPrefix() + killer.getName()));
-                    p.sendMessage(player.getName() + " was killed by " + killer.getName());
+                    p.sendMessage(ChatColor.YELLOW + player.getName() + ChatColor.RED + " has been killed by " + ChatColor.YELLOW + killer.getName() + ChatColor.RED + ".");
                 });
                 break;
             }
             case DIED: {
                 matchAction(p -> {
-//                    p.sendMessage(Messages.PLAYER_DEATH_DIED.getMessage().replace("%player%", getEntryTeam(player).getPrefix() + player.getName()));
-                    p.sendMessage(player.getName() + " died");
+                    p.sendMessage(ChatColor.YELLOW + player.getName() + ChatColor.RED + " has died.");
                 });
                 break;
             }
             case LEFT: {
                 matchAction(p -> {
-//                    p.sendMessage(Messages.PLAYER_DEATH_LEFT.getMessage().replace("%player%", getEntryTeam(player).getPrefix() + player.getName()));
-                    p.sendMessage(player.getName() + " left");
+                    p.sendMessage(ChatColor.YELLOW + player.getName() + ChatColor.RED + " has left the match.");
                 });
                 exempt.add(player.getUniqueId());
                 break;
@@ -277,7 +273,6 @@ public class Match {
             if (getAlive(false) == 0) end(true);
         }
     }
-
 
 
     public void matchAction(Consumer<? super Player> action) {
