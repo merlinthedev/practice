@@ -30,6 +30,8 @@ public class KitCommand implements CommandExecutor {
                     player.sendMessage("§c/kit list §8- §fList all kits");
                     player.sendMessage("§c/kit setDisplayItem <kit name> §8- §fSet a kit's display item");
                     player.sendMessage("§c/kit setInventory <kit name> §8- §fSet a kit's display name");
+                    player.sendMessage("§c/kit see <kit name> §8- §fSee a kit's informaion");
+                    player.sendMessage("§c/kit give <kit name> §8- §fGive a kit to a player");
 
                     break;
                 case 1:
@@ -130,7 +132,29 @@ public class KitCommand implements CommandExecutor {
                                 player.sendMessage("§e" + item.getType().name());
                             }
                         }
+
+                        for(ItemStack item : kit.getArmor()){
+                            if(item != null){
+                                player.sendMessage("§e" + item.getType().name());
+                            }
+                        }
                         return true;
+                    }
+
+                    if (strings[0].equalsIgnoreCase("give")) {
+                        if (strings[1] == null) {
+                            player.sendMessage("§cYou must specify a kit!");
+                        }
+
+                        Kit kit = kitHandler.getKit(strings[1]);
+                        if (kit == null) {
+                            player.sendMessage("§cKit not found!");
+                        }
+
+
+                        player.getInventory().setContents(kit.getInventory());
+                        player.getInventory().setArmorContents(kit.getArmor());
+                        player.updateInventory();
                     }
 
                     break;

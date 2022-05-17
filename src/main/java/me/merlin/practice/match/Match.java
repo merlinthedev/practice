@@ -13,6 +13,7 @@ import me.merlin.practice.profile.PlayerProfile;
 import me.merlin.practice.profile.ProfileHandler;
 import me.merlin.practice.util.Logger;
 import me.merlin.practice.util.fanciful.FancyMessage;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Item;
@@ -22,6 +23,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -106,8 +108,9 @@ public class Match {
             player.updateInventory();
             player.setMaximumNoDamageTicks(kit != null ? kit.getDamageTicks() : 19);
 
-            System.out.println(kit.getArmor());
-            System.out.println(kit.getInventory());
+
+            System.out.println(Arrays.toString(kit.getArmor()));
+            System.out.println(Arrays.toString(kit.getInventory()));
             Logger.success("Inventory set!");
         });
 
@@ -188,6 +191,9 @@ public class Match {
                     playerProfile.setLongestCombo(0);
                     playerProfile.setThrownPots(0);
                     playerProfile.setFullyLandedPots(0);
+
+
+                    playerProfile.setPlayerState(PlayerProfile.PlayerState.LOBBY);
 
 
                     playerHandler.giveItems(player);
@@ -272,6 +278,8 @@ public class Match {
         }
     }
 
+
+
     public void matchAction(Consumer<? super Player> action) {
         players.forEach(u -> {
             Player player = Bukkit.getPlayer(u);
@@ -302,13 +310,19 @@ public class Match {
 
     public void broadcast(String message) {
         matchAction(player -> player.sendMessage(message));
+    }
 
+    public void broadcast(TextComponent message) {
+        matchAction(player -> player.spigot().sendMessage(message));
     }
 
     public void playSound(Sound sound) {
-        matchAction(player -> player.playSound(player.getLocation(), sound, 20, 20));
+        matchAction(player -> player.playSound(player.getLocation(), sound, 20f, 20f));
     }
 
+    private void hide(Player player) {
+        Bukkit.getOnlinePlayers().stream().filter(p -> !players.contains(p.getUniqueId())).forEach(p -> p.hidePlayer(player));
+    }
 
     public enum MatchState {
         STARTING, ACTIVE, ENDING

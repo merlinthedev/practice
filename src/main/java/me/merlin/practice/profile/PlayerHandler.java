@@ -2,6 +2,7 @@ package me.merlin.practice.profile;
 
 import me.merlin.practice.Practice;
 import me.merlin.practice.items.Items;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -20,6 +21,8 @@ public class PlayerHandler {
 
         ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
         PlayerProfile profile = profileHandler.getProfile(player);
+
+        player.setGameMode(GameMode.SURVIVAL);
 
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
@@ -47,7 +50,12 @@ public class PlayerHandler {
         spawn.setX(Practice.getInstance().getConfig().getDouble("spawn.x"));
         spawn.setY(Practice.getInstance().getConfig().getDouble("spawn.y"));
         spawn.setZ(Practice.getInstance().getConfig().getDouble("spawn.z"));
+        spawn.setYaw(180f);
         player.teleport(spawn);
+
+
+
+
 
     }
 

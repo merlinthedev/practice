@@ -67,6 +67,11 @@ public class MatchListener implements Listener {
     @EventHandler
     public void onHungerEvent(FoodLevelChangeEvent event) {
         Player player = (Player) event.getEntity();
+        ProfileHandler profileHandler = Practice.getInstance().getProfileHandler();
+        PlayerProfile profile = profileHandler.getProfile(player);
+        if (profile.getPlayerState() == PlayerProfile.PlayerState.LOBBY) {
+            event.setCancelled(true);
+        }
 
         MatchHandler matchHandler = Practice.getInstance().getMatchHandler();
         if (matchHandler.getMatch(player) == null) {
@@ -151,7 +156,6 @@ public class MatchListener implements Listener {
                 return;
             }
             Match match = matchHandler.getMatch(damager);
-
 
 
             if (match.getMatchState() != Match.MatchState.ACTIVE) {
