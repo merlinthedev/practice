@@ -1,17 +1,6 @@
 spawn:
 
 
-kits:
-  NoDebuff:
-    item: 276
-    display: NoDebuff
-  Debuff:
-    item: 283
-    display: Debuff
-  Sumo:
-    item: 280
-    display: Sumo
-
 items:
   UNRANKED:
     slot: 0

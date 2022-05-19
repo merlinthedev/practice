@@ -1,6 +1,7 @@
 package me.merlin.practice;
 
 import lombok.Getter;
+import me.merlin.practice.config.ConfigHandler;
 import me.merlin.practice.duel.DuelHandler;
 import me.merlin.practice.effects.EffectHandler;
 import me.merlin.practice.items.ItemHandler;
@@ -38,6 +39,7 @@ public class Practice extends JavaPlugin {
     @Getter private EffectHandler effectHandler;
     @Getter private ItemHandler itemHandler;
     @Getter private DebugHandler debugHandler;
+    @Getter private ConfigHandler configHandler;
 
 
     public void onEnable() {
@@ -67,6 +69,7 @@ public class Practice extends JavaPlugin {
 
     private void registerHandlers() {
         mongoHandler = new MongoHandler();
+        configHandler = new ConfigHandler();
         profileHandler = new ProfileHandler();
         kitHandler = new KitHandler();
         matchHandler = new MatchHandler();

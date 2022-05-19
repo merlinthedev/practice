@@ -27,38 +27,55 @@ public class KitHandler {
     }
 
     private void load() {
-        if (plugin.getConfig().getConfigurationSection("kits") == null) return;
+//        if (plugin.getConfig().getConfigurationSection("kits") == null) return;
+//
+//        plugin.getConfig().getConfigurationSection("kits").getKeys(false).forEach(kitName -> {
+//            // Log every kit to console
+//            //Logger.info("Loading kit: " + kitName);
+//            Kit kit = new Kit(kitName);
+//
+//            kit.setDisplayName(plugin.getConfig().getString("kits." + kitName + ".display"));
+//            //Logger.info("Display name: " + kit.getDisplayName());
+////            kit.setDisplayItem((ItemStack) plugin.getConfig().getInt("kits." + kitName + ".item"));
+//            ItemStack dp = new ItemStack(plugin.getConfig().getInt("kits." + kitName + ".item"));
+//            kit.setDisplayItem(dp);
+//           // Logger.info("Display item: " + kit.getDisplayItem());
+//
+//            if (Practice.getInstance().getConfig().getString("kits." + kitName + ".inventory") != null) {
+//                kit.setInventory(((List<ItemStack>)plugin.getConfig().get("kits." + kitName + ".inventory")).toArray(new ItemStack[0]));
+//                kit.setArmor(((List<ItemStack>)plugin.getConfig().get("kits." + kitName + ".armor")).toArray(new ItemStack[0]));
+//                //Logger.success("Loaded kit " + kit.getName() + " , Length:" + kit.getInventory().length + " , " + kit.getArmor().length);
+//
+//
+//            }
+//
+//
+//
+//
+//            addKit(kit);
+//        });
 
-        plugin.getConfig().getConfigurationSection("kits").getKeys(false).forEach(kitName -> {
-            // Log every kit to console
-            Logger.info("Loading kit: " + kitName);
+        if(plugin.getConfigHandler().getKitsFile().getConfigurationSection("kits") == null) return;
+
+        plugin.getConfigHandler().getKitsFile().getConfigurationSection("kits").getKeys(false).forEach(kitName -> {
             Kit kit = new Kit(kitName);
-
-            kit.setDisplayName(plugin.getConfig().getString("kits." + kitName + ".display"));
-            Logger.info("Display name: " + kit.getDisplayName());
-//            kit.setDisplayItem((ItemStack) plugin.getConfig().getInt("kits." + kitName + ".item"));
-            ItemStack dp = new ItemStack(plugin.getConfig().getInt("kits." + kitName + ".item"));
+            kit.setDisplayName(plugin.getConfigHandler().getKitsFile().getString("kits." + kitName + ".display"));
+            ItemStack dp = new ItemStack(plugin.getConfigHandler().getKitsFile().getInt("kits." + kitName + ".item"));
             kit.setDisplayItem(dp);
-            Logger.info("Display item: " + kit.getDisplayItem());
-
-            if (Practice.getInstance().getConfig().getString("kits." + kitName + ".inventory") != null) {
-//                kit.setInventory(plugin.getConfig().getStringList("kits." + kitName + ".inventory").toArray(new ItemStack[0]));
-//                Logger.info("Loaded kit " + kit.getName() + " , Length:" +  kit.getInventory().length);
-//                Logger.info("Inventory: " + plugin.getConfig().getConfigurationSection(kitName + ".inventory").getKeys(false));
-//                kit.setArmor(plugin.getConfig().getStringList("kits." + kitName + ".armor").toArray(new ItemStack[0]));
-//                Logger.info("Loaded kit " + kit.getName() + " , Length:" + kit.getArmor().length);
-                kit.setInventory(((List<ItemStack>)plugin.getConfig().get("kits." + kitName + ".inventory")).toArray(new ItemStack[0]));
-                kit.setArmor(((List<ItemStack>)plugin.getConfig().get("kits." + kitName + ".armor")).toArray(new ItemStack[0]));
-                Logger.success("Loaded kit " + kit.getName() + " , Length:" + kit.getInventory().length + " , " + kit.getArmor().length);
 
 
+
+            if(plugin.getConfigHandler().getKitsFile().getString("kits." + kitName + ".inventory") != null) {
+                kit.setInventory(((List<ItemStack>)plugin.getConfigHandler().getKitsFile().get("kits." + kitName + ".inventory")).toArray(new ItemStack[0]));
+                kit.setArmor(((List<ItemStack>)plugin.getConfigHandler().getKitsFile().get("kits." + kitName + ".armor")).toArray(new ItemStack[0]));
             }
 
-
-            Logger.success("Loaded kit " + kit.getName());
-
             addKit(kit);
+
+
         });
+
+
     }
 
     public void addKit(Kit kit) {

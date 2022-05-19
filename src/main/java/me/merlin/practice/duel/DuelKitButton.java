@@ -29,7 +29,7 @@ public class DuelKitButton extends Button {
 //        r.setItemMeta(m);
 //
 //        return r;
-        return new ItemStack(Practice.getInstance().getConfig().getInt("kits." + kit.getName() + ".item"));
+        return new ItemStack(Practice.getInstance().getConfigHandler().getKitsFile().getInt("kits." + kit.getName() + ".item"));
     }
 
     @Override
