@@ -27,6 +27,8 @@ public class SpawnCommand implements CommandExecutor {
             if (strings.length == 0) {
                 Logger.info("You must specify a location to spawn at.");
                 Location loc = new Location(player.getWorld(), plugin.getConfig().getDouble("spawn.x"), plugin.getConfig().getDouble("spawn.y"), plugin.getConfig().getDouble("spawn.z"));
+                loc.setY(loc.getY() + 1);
+                loc.setYaw(180f);
                 player.teleport(loc);
                 player.sendMessage(ChatColor.GREEN + "You have been teleported to the spawn.");
 
@@ -39,6 +41,7 @@ public class SpawnCommand implements CommandExecutor {
                     plugin.getConfig().set("spawn.x", location.getX());
                     plugin.getConfig().set("spawn.y", location.getY());
                     plugin.getConfig().set("spawn.z", location.getZ());
+
 
                     plugin.saveConfig();
                     player.sendMessage("§aSpawn set!");

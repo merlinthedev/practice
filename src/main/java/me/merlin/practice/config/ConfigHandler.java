@@ -43,7 +43,7 @@ public class ConfigHandler {
 
     }
 
-    private void saveKitsFile() {
+    public void saveKitsFile() {
         try {
             kitsFile.save(new File(Practice.getInstance().getDataFolder(), "kits.yml"));
         } catch (IOException e) {
@@ -65,7 +65,7 @@ public class ConfigHandler {
 
     }
 
-    private void safeArenaFile() {
+    public void safeArenaFile() {
         try {
             arenaFile.save(new File(Practice.getInstance().getDataFolder(), "arena.yml"));
         } catch (IOException e) {

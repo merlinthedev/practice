@@ -1,6 +1,7 @@
 package me.merlin.practice;
 
 import lombok.Getter;
+import me.merlin.practice.arena.ArenaHandler;
 import me.merlin.practice.config.ConfigHandler;
 import me.merlin.practice.duel.DuelHandler;
 import me.merlin.practice.effects.EffectHandler;
@@ -40,6 +41,7 @@ public class Practice extends JavaPlugin {
     @Getter private ItemHandler itemHandler;
     @Getter private DebugHandler debugHandler;
     @Getter private ConfigHandler configHandler;
+    @Getter private ArenaHandler arenaHandler;
 
 
     public void onEnable() {
@@ -80,6 +82,7 @@ public class Practice extends JavaPlugin {
         itemHandler = new ItemHandler();
         playerHandler = new PlayerHandler();
         debugHandler = new DebugHandler();
+        arenaHandler = new ArenaHandler();
     }
 
     private void disableGameRules(String... gameRules) {

@@ -24,3 +24,5 @@ commands:
     description: Toggle builder mode
   giveitems:
     description: Give a player the default lobby items
+  arena:
+    description: Arena command
